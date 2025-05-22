@@ -1,0 +1,21 @@
+name: Validación mínima CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  check-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Verificar que existe README.md
+        run: |
+          if [ ! -f README.md ]; then
+            echo "Falta el archivo README.md"
+            exit 1
+          else
+            echo "README.md encontrado ✅"
+          fi
